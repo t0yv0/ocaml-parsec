@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="next" href="Parsec.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="LazyStream" rel="Chapter" href="LazyStream.html">
+<link title="Parsec" rel="Chapter" href="Parsec.html"><title>LazyStream</title>
+</head>
+<body>
+<div class="navbar">&nbsp;<a href="index.html">Up</a>
+&nbsp;<a href="Parsec.html">Next</a>
+</div>
+<center><h1>Module <a href="type_LazyStream.html">LazyStream</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> LazyStream: <code class="code">sig</code> <a href="LazyStream.html">..</a> <code class="code">end</code></pre>Implements lazy lists or streams. Unlike the streams from the
+    Stream module, LazyStream values have a pure interface and support
+    backtracking.<br>
+<hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEt"></a><code class="type">'a</code> t </pre>
+<div class="info">
+Represents a lazy stream.<br>
+</div>
+
+<pre><span class="keyword">val</span> <a name="VALnext"></a>next : <code class="type">'a <a href="LazyStream.html#TYPEt">t</a> -> ('a * 'a <a href="LazyStream.html#TYPEt">t</a>) option</code></pre><div class="info">
+Destructures a lazy stream.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALfrom"></a>from : <code class="type">(int -> 'a option) -> 'a <a href="LazyStream.html#TYPEt">t</a></code></pre><div class="info">
+Constructs a lazy stream from a generator.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALiter"></a>iter : <code class="type">('a -> unit) -> 'a <a href="LazyStream.html#TYPEt">t</a> -> unit</code></pre><div class="info">
+Iterates over a lazy stream.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_list"></a>of_list : <code class="type">'a list -> 'a <a href="LazyStream.html#TYPEt">t</a></code></pre><div class="info">
+Converts a list to a lazy stream.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_string"></a>of_string : <code class="type">string -> char <a href="LazyStream.html#TYPEt">t</a></code></pre><div class="info">
+Converts a string to a lazy character stream.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALof_channel"></a>of_channel : <code class="type">Pervasives.in_channel -> char <a href="LazyStream.html#TYPEt">t</a></code></pre><div class="info">
+Lazily reads all characters from the channel.<br>
+</div>
+<pre><span class="keyword">val</span> <a name="VALcount"></a>count : <code class="type">'a <a href="LazyStream.html#TYPEt">t</a> -> int</code></pre><div class="info">
+Counts the number of elements in the stream.<br>
+</div>
+</body></html>

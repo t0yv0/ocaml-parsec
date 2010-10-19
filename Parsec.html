@@ -1,0 +1,27 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<link rel="stylesheet" href="style.css" type="text/css">
+<meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">
+<link rel="Start" href="index.html">
+<link rel="previous" href="LazyStream.html">
+<link rel="Up" href="index.html">
+<link title="Index of types" rel=Appendix href="index_types.html">
+<link title="Index of values" rel=Appendix href="index_values.html">
+<link title="Index of modules" rel=Appendix href="index_modules.html">
+<link title="LazyStream" rel="Chapter" href="LazyStream.html">
+<link title="Parsec" rel="Chapter" href="Parsec.html"><title>Parsec</title>
+</head>
+<body>
+<div class="navbar"><a href="LazyStream.html">Previous</a>
+&nbsp;<a href="index.html">Up</a>
+&nbsp;</div>
+<center><h1>Module <a href="type_Parsec.html">Parsec</a></h1></center>
+<br>
+<pre><span class="keyword">module</span> Parsec: <code class="code">sig</code> <a href="Parsec.html">..</a> <code class="code">end</code></pre>Defines parser combinators inspired by Text.Parsec in Haskell.<br>
+<hr width="100%">
+<pre><span class="keyword">type</span> <a name="TYPEparser"></a><code class="type">('a, 'b)</code> parser </pre>
+
+<pre><span class="keyword">type</span> <a name="TYPEstream"></a><code class="type">'a</code> stream = <code class="type">'a <a href="LazyStream.html#TYPEt">LazyStream.t</a></code> </pre>
+
+<pre><span class="keyword">val</span> <a name="VALreturn"></a>return : <code class="type">'a -> ('b, 'a) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALbind"></a>bind : <code class="type">('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -><br>       ('b -> ('a, 'c) <a href="Parsec.html#TYPEparser">parser</a>) -> ('a, 'c) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALchoose"></a>choose : <code class="type">('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('a, 'b) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALattempt"></a>attempt : <code class="type">('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('a, 'b) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALrun"></a>run : <code class="type">('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> 'a <a href="Parsec.html#TYPEstream">stream</a> -> 'b option</code></pre><pre><span class="keyword">val</span> <a name="VALtoken"></a>token : <code class="type">('a -> 'b option) -> ('a, 'b) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALmany"></a>many : <code class="type">('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('a, 'b list) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALmany1"></a>many1 : <code class="type">('a, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('a, 'b list) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALfold"></a>fold : <code class="type">('a -> 'b -> 'a) -> 'a -> ('c, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('c, 'a) <a href="Parsec.html#TYPEparser">parser</a></code></pre><pre><span class="keyword">val</span> <a name="VALfold1"></a>fold1 : <code class="type">('a -> 'b -> 'a) -> 'a -> ('c, 'b) <a href="Parsec.html#TYPEparser">parser</a> -> ('c, 'a) <a href="Parsec.html#TYPEparser">parser</a></code></pre></body></html>
