@@ -1,3 +1,5 @@
+(** Defines parser combinators inspired by Text.Parsec in Haskell. *)
+
 type ('t, 'a) parser
 
 type 't stream = 't LazyStream.t
