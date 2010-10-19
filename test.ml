@@ -1,26 +1,17 @@
-let stdin_stream = LazyStream.of_channel stdin
-let sample_stream = LazyStream.of_string "acd"
-
-open Parsec
-
-let char c = token (fun x ->
-  if (x = c) then Some x else None)
-
-let ( <|> ) = choose
-let ( >> ) a b = bind a (fun _ -> b)
-
-let p = 
-  attempt (char 'a' >> char 'b')
-  <|> (char 'a' >> char 'c')
-
-let sumP () = fold ( + ) 0 (token (fun _ -> Some 1))
-let r       = run p sample_stream
+module L = LazyStream
+module P = Parsec
 
 let _ =
-  match r with
-    | None   -> Printf.printf "NO\n"
-    | Some n -> Printf.printf "YES %c\n" n
-  
-
-
-  
+  assert (Some 1 = P.run (P.return 1) (L.of_string ""));  
+  let char c = P.token (fun x -> if (x = c) then Some x else None) in
+  let ( <|> ) = P.choose in
+  let ( >> ) a b = P.bind a (fun _ -> b) in
+  let p =
+    (char 'a' >> char 'b')
+    <|> (char 'a' >> char 'c') in
+  assert (None = P.run p (L.of_string "ac"));
+  let p =
+    P.attempt (char 'a' >> char 'b')
+    <|> (char 'a' >> char 'c')
+  in
+  assert (Some 'c' = P.run p (L.of_string "ac"))

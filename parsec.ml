@@ -2,44 +2,43 @@ type 'a stream = 'a LazyStream.t
 
 type ('t, 'a) reply = 
     Fail
-  | Match of 'a * 't stream
+  | Match of 'a
   | Parse of ('t, 'a) parser * 't stream
 
 and ('t, 'a) parser =
     't stream -> ('t, 'a) reply
 
-let return x s = Match (x, s)
+let return x _ = Match x
     
 let rec bind p f s =
   match p s with
-    | Fail as fail  -> fail
-    | Match (x, s') -> Parse (f x, s')
+    | Fail          -> Fail
+    | Match x       -> f x s
     | Parse (q, s') -> Parse (bind q f, s')
 
 let choose p q s =
   match p s with
-    | Fail           -> q s
-    | Match _ as r   -> r
-    | Parse (q', s') -> q' s'
+    | Fail -> q s
+    | r    -> r
 
-let attempt p s =
+let rec attempt p s =
   match p s with
-    | Parse (q', s') -> q' s'
+    | Parse (q', s') -> attempt q' s'
     | r              -> r
 
 let rec run p s =
   match p s with
     | Fail          -> None
-    | Match (r, _)  -> Some r
+    | Match r       -> Some r
     | Parse (q, s') -> run q s'
 
-let token f s =
+let token (f : 'a -> 'b option) : ('a, 'b) parser = fun s ->
   match LazyStream.next s with
     | None         -> Fail
     | Some (t, s') ->
       match f t with
         | None   -> Fail
-        | Some x -> Match (x, s')
+        | Some x -> Parse (return x, s')
           
 let ( >>= ) = bind
 
